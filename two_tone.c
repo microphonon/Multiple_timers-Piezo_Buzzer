@@ -24,7 +24,7 @@ void main(void) {
 
         P1OUT |= BIT0; //Turn on green LED on Launchpad                   
     
-	    for (i=0; i < 6; i++) //Play two-tone sequence 6 times
+	for (i=0; i < 6; i++) //Play two-tone sequence 6 times
     	{
         	TA1CCR0 = 227; //First period at 2200 Hz; 1 count is 2 us at 500 kHz SMCLK
         	TA1CCR1 = 114; //50% modulation
@@ -35,7 +35,7 @@ void main(void) {
         	TA1CCR1 = 192; //50% modulation
         	TA0CCR0 = 2000; //200 ms duration of 2nd tone; Re-start VLO timer
         	LPM3;
-		    //TA0 timeout. Resume loop
+		//TA0 timeout. Resume loop
     	}    	
     	TA1CTL = MC_0 + TACLR + OUT; //Turn off timer TA1
     	TA1CCTL1 = OUTMOD_0; //Change output mode to prevent leaving it in high state
