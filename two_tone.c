@@ -41,9 +41,13 @@ void main(void) {
             TA1CCR1 = 192; //50% modulation
             TA0CCR0 = 2000; //200 ms duration of 2nd tone; Re-start VLO timer
             LPM3;
+            TA1CCR0 = 0; //Turn off timer TA1
+            TA0CCR0 = 5000; //500 ms quiet pause
+            LPM3;
             //TA0 timeout. Resume loop
         }
-        TA1CTL = MC_0 + TACLR + OUT; //Turn off timer TA1
+        TA1CCR0 = 0; //Stop timer TA1
+        TA1CTL = MC_0; //Disable timer TA1 to save power
         TA1CCTL1 = OUTMOD_0; //Change output mode to prevent leaving it in high state
         P1OUT &= ~BIT0; //Turn off LED
 }
